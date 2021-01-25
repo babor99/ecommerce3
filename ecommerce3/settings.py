@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '4(2&%2x2v3fut2@g$o=569wr-xy-ul-_*7^67=*a669=zv!koq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'babor-ecom.herokuapp.com']
 
 
 # Application definition
