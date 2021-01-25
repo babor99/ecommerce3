@@ -1,0 +1,24 @@
+{% extends 'admin/admin_base.html' %}
+
+
+{% block title %}
+admin-prduct-add
+{% endblock title %}
+
+ 
+
+{% block content %}
+
+<h2 class="text-center">Admin Panel</h2><hr>
+<div class="row">
+    <div class="col-md-6 text-center ml-5 pl-5 mb-5">
+        <h4>Add New Products</h4>
+        <form class="border border-secondary" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-primary">Save Product</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

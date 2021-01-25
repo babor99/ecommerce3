@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} home {% endblock %}
+
+
+
+{% block content %}
+
+<div class="row mt-3">
+
+    {% for product in page_obj %}
+    <div class="col-sm-4 col-lg-3 mb-2">
+        <img class="thumbnail" src="{{product.image.url}}">
+        <div class="box-element">
+            <h6><strong>{{product.title}}</strong></h6>
+            <p>Price:<strike class="mx-2">BDT {{product.marked_price}}/=</strike>BDT {{product.selling_price}}/=</p>
+            <hr>
+            <a href="{% url 'ecomapp:add_to_cart' product.id %}" class="btn btn-outline-secondary">Add to Cart</a>
+            <a href="{% url 'ecomapp:product_detail' product.slug %}" class="btn btn-outline-success">View</a>
+            <h4 style="display: inline-block; float: right;"></h4>
+        </div>
+    </div>
+    {% endfor %}
+</div> 
+
+<!-- pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center my-3">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+        </li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+            {% if i == page_obj.number %}
+        <li class="page-item active"><a class="page-link">{{i}}</a></li>
+            {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock content %}

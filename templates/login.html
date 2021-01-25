@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+login
+{% endblock title %}
+
+ 
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h2>Login Here!</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-success" href="#">Login</button>
+            {% if error %}
+            <li style="color:red;">{{error}}</li>
+            {% endif %}
+        </form>
+        <div class="">
+            <li class="">Forgot password? <a href="{% url 'ecomapp:forgot_password' %}">Reset now</a></li>
+            <li>Don't have an account? <a href="{% url 'ecomapp:register' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">Register for new account</a></li>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

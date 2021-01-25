@@ -1,0 +1,64 @@
+ {% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><i>{ManitobaStore}</i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:category_wise' %}">All Categories</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link active text-truncate" aria-current="page" href="{% url 'ecomapp:profile' %}">MyProfile</a>
+        </li>
+
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:admin_login' %}">A.Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:admin_home' %}">A.Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:admin_all_orders' %}">A.Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:admin_product_list' %}">A.Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:forgot_password' %}">ResetPass</a>
+        </li> -->
+
+      </ul>
+      <div class="float-right justify-content-end">
+          <form action="{% url 'ecomapp:search' %}" method="GET">
+            <input type="text" name="keyword" placeholder="Search product here..." required>
+            <button class="btn btn-primary">Search</button>
+          </form>
+      </div>
+    </div>
+    <div class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav mx-2">
+         {% if request.user.customer %}
+          <li class="nav-item mt-2">
+            <i><b class="text-light mx-3">hello! {{request.user.username}}</b></i>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:register' %}">Register</a>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'ecomapp:login' %}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+         <a class="btn btn-warning" href="{% url 'ecomapp:my_cart' %}">MyCart</a>
+    </div>
+  </div>
+</nav>

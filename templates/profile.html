@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+my profile
+{% endblock title %}
+
+
+
+{% block content %}
+<h2 class="text-center">My Profile</h2><hr>
+<div class="row ">
+    <div class="col-md-3 ml-2">
+        <h3 class="text-success">Profile Summary</h3>
+        <div class="table-bordered pl-3">
+            <p><span class="font-weight-bold">Name:</span> {{customer.full_name}}</p>
+            <p><span class="font-weight-bold">Username:</span> {{customer.user.username}}</p>
+            <p><span class="font-weight-bold">Email:</span> {{customer.user.email}}</p>
+            <p><span class="font-weight-bold">Address:</span> {{customer.address}}</p>
+            <p><span class="font-weight-bold">Joined on:</span> {{customer.joined_on}}</p>
+        </div>
+    </div>
+    <div class="col-md-8 text-center float-right">
+        <h3 class="text-primary">Order History</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                <th>SN</th>
+                <th>Order Id</th>
+                <th>Amount</th>
+                <th>Ordered on</th>
+                <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                   <td><a href="{% url 'ecomapp:order_detail' order.id %}">#order_{{order.id}}</a></a></td>
+                    <td>{{order.total}}</td>
+                    <td>{{order.created_at}} || {{order.created_at|timesince}} ago</td>
+                    <td>{{order.order_status}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+{% endblock content %}

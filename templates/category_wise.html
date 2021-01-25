@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+
+
+
+{% block content %}
+
+{% for category in categories %}
+
+<h3 class="mt-2">{{category.title}}</h3>
+<hr>
+<div class="row">
+
+    {% for product in category.product_set.all %}
+    <div class="col-sm-4 col-lg-3 mb-2">
+        <img class="thumbnail" src="{{product.image.url}}">
+        <div class="box-element">
+            <h6><strong>{{product.title}}</strong></h6>
+            <p>Price:<strike class="mx-2">BDT {{product.marked_price}}/=</strike>BDT {{product.selling_price}}/=</p>
+            <hr>
+            <a href="{% url 'ecomapp:add_to_cart' product.id %}" class="btn btn-outline-secondary">Add to Cart</a>
+            <a href="{% url 'ecomapp:product_detail' product.slug %}" class="btn btn-outline-success">View</a>
+         </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endfor %}
+
+{% endblock content %}

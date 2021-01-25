@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+checkout
+{% endblock title %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7">
+        <h2>Items in MyCart</h2><hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Product</th>
+                    <th>Rate</th>
+                    <th>Quantity</th>
+                    <th>Sub-total</th>
+                 </tr>
+            </thead>
+            <tbody>
+                {% if cart.cartproduct_set.all %}
+                <tr>
+                    <a class="btn btn-outline-secondary mb-2" href="{% url 'ecomapp:home' %}">Continue Shopping</a>
+                </tr>
+                {% endif %}
+
+                {% for cp in cart.cartproduct_set.all %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{cp.product.title}}</td>
+                    <td>{{cp.rate}}</td>
+                    <td>{{cp.quantity}}</td>
+                    <td>{{cp.subtotal}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="4" class="text-right">Cart Total:</th>
+                    <th>BDT {{cart.total}}/=</th>
+                 </tr>
+                
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-5 text-center">
+        <h3>Checkout Form</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-success" type="submit">Place Order</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

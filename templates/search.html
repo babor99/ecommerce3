@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+
+{% block title %}
+search
+{% endblock %}
+
+
+
+
+{% block content %}
+<h3 class="text-center">Search results for<span class="text-warning"> '{{request.GET.keyword}}':</span></h3>
+ {% for message in info_message %}
+<ul>
+    <li>{{message}}</li>
+</ul>
+{% endfor %}
+
+ {% for product in searched_items %}
+<div class="col-sm-4 col-lg-3 mb-2">
+    <img class="thumbnail" src="{{product.image.url}}">
+    <div class="box-element">
+        <h6><strong>{{product.title}}</strong></h6>
+        <p>Price:<strike class="mx-2">BDT {{product.marked_price}}/=</strike>BDT {{product.selling_price}}/=</p>
+        <hr>
+        <a href="{% url 'ecomapp:add_to_cart' product.id %}" class="btn btn-outline-secondary">Add to Cart</a>
+        <a href="{% url 'ecomapp:product_detail' product.slug %}" class="btn btn-outline-success">View</a>
+        <h4 style="display: inline-block; float: right;"></h4>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
